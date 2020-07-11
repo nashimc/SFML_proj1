@@ -1,0 +1,73 @@
+// {
+// 	"folders":
+// 	[
+// 		{
+// 			"path": "bin/.."
+// 		}
+// 	],
+// 	"build_systems":
+// 	[
+// 		{
+// 			"name": "C++ Debug",
+// 			"working_dir": "${project_path}",
+// 			"cmd": ["g++ -c src/*.cpp -std=c++14 -m64 -g -Wall -I include -L lib -l SDL2-2.0.0 -l SDL2_image && g++ *.o -o bin/debug/main -l SDL2-2.0.0 -l SDL2_image && ./bin/debug/main"],
+// 			"selector": "source.c++",
+// 			"shell": true,
+// 		},
+// 		{
+// 			"name": "C++ Release",
+// 			"working_dir": "${project_path}",
+// 			"cmd": ["g++ -c src/*.cpp -std=c++14 -m64 -O3 -Wall -I include -L lib -l SDL2-2.0.0 -l SDL2_image && g++ *.o -o bin/release/main -l SDL2-2.0.0 -l SDL2_image && ./bin/debug/main"],
+// 			"selector": "source.c++",
+// 			"shell": true,
+// 		},
+// 				{
+// 			"name": "C++ sdl2 standard",
+// 			"working_dir": "${project_path}",
+// 			"cmd": ["g++ src/*.cpp -o main -I include -L lib -l SDL2-2.0.0 -l SDL2_image && ./bin/debug/main"],
+// 			"selector": "source.c++",
+// 			"shell": true,
+// 		}
+// 	]
+// }
+// Capital ell: search path for libraries. Capital eye: search path for include files. Small ell: name of library to link
+{
+	"folders":
+	[
+		{
+			"path": "bin/.."
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "C++ Debug",
+			"working_dir": "${project_path}",
+			"cmd": ["g++ -c src/*.cpp -std=c++14 -m64 -g -Wall -I include && g++ *.o -o bin/debug/main -l SDL2-2.0.0 -l SDL2_image && ./bin/debug/main"],
+			"selector": "source.c++",
+			"shell": true,
+		},
+		{
+			"name": "C++ Release",
+			"working_dir": "${project_path}",
+			"cmd": ["g++ -c src/*.cpp -std=c++14 -m64 -O3 -Wall -I include && g++ *.o -o bin/release/main -l SDL2-2.0.0 -l SDL2_image && ./bin/release/main"],
+			"selector": "source.c++",
+			"shell": true,
+		},
+		// {
+		// 	"name": "C++ sdl2 standard",
+		// 	"working_dir": "${project_path}",
+		// 	"cmd": ["g++ src/*.cpp -o main -I include && .main"],
+		// 	"selector": "source.c++",
+		// 	"shell": true,
+		// },
+		{	// Using brew cellar SFML paths
+			// /usr/local/Cellar/sfml/2.5.1/include/SFML
+			"name": "C++ SFML standard",
+			"working_dir": "${project_path}",
+			"cmd": ["g++ src/*.cpp -std=c++14 -o main -I /usr/local/Cellar/sfml/2.5.1/include -I include -L /usr/local/Cellar/sfml/2.5.1/lib -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window && ${project_path}/main"],
+			"selector": "source.c++",
+			"shell": true,
+		}
+	]
+}
