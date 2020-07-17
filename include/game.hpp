@@ -7,6 +7,7 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+#include "enemy.hpp"
 
 
 
@@ -21,20 +22,18 @@ private:
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
 
+	// Controls
+	bool mouseHeld;
+
 	// Game logic
 	int points;
 	int health;
 	bool deleted;
-	float enemySpawnTimer;
-	float enemySpawnTimerMax;
-	int maxEnemies;
-	bool mouseHeld;
 
-	// Game objects
+	// Game objects	
 	std::vector<sf::RectangleShape> enemies;
-	sf::RectangleShape enemy;
 
-
+	Enemy En{800, 600, points, health, mousePosView, &enemies};
 
 public:
 	// Constructor + Destructor
@@ -50,11 +49,13 @@ public:
 	const bool isRunning() const;
 
 	// Funcs
-	void spawnEnemy();
+	
 
 	void pollEvents();		// internally used in this->update()
 	void updateMousePositions();
-	void updateEnemies();
+	void spawnRecEnemy();
+	void spawnCircEnemy();
+	void checkInputs();
 	void update();
 	void renderEnemies(sf::RenderTarget& target);
 	void render();
