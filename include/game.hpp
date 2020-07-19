@@ -8,6 +8,7 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 #include "enemy.hpp"
+#include "render.hpp"
 
 
 
@@ -33,7 +34,11 @@ private:
 	// Game objects	
 	std::vector<sf::RectangleShape> enemies;
 
-	Enemy En{800, 600, points, health, mousePosView, &enemies};
+	Enemy en{800, 600, points, health, mousePosView, &enemies};
+	Render* ren;
+
+
+	
 
 public:
 	// Constructor + Destructor
@@ -43,15 +48,12 @@ public:
 	// Init
 	void initVariables();
 	void initWindow();
-	// sf::RectangleShape initEnemies();
 
 	// Accessors
 	const bool isRunning() const;
 
 	// Funcs
-	
-
-	void pollEvents();		// internally used in this->update()
+	void pollEvents();			// internally used in this->update()
 	void updateMousePositions();
 	void spawnRecEnemy();
 	void spawnCircEnemy();
@@ -59,4 +61,7 @@ public:
 	void update();
 	void renderEnemies(sf::RenderTarget& target);
 	void render();
+
+	// Debug
+	void deleteOnClose(); 	
 };

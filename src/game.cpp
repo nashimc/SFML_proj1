@@ -7,11 +7,11 @@ Game::Game(){
 	this->initVariables();		// create window with nullptr first
 	this->initWindow();
 
-	
+	ren = new Render{window, &enemies};	
 }
 
 Game::~Game(){
-	// delete this->window;
+
 }
 
 void Game::initVariables(){
@@ -29,8 +29,8 @@ void Game::initVariables(){
 }
 
 void Game::initWindow(){
-	this->videoMode.width = 800;			// accessing sf::VideoMode variables
-	this->videoMode.height = 600;			// accessing sf::VideoMode variables
+	this->videoMode.width = 800;			// accessing 
+	this->videoMode.height = 600;			// accessing 
 
 	this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Titlebar | sf::Style::Close);		// window properties
 
@@ -96,30 +96,21 @@ void Game::update(){
 
 	// Calling polling of event/update functions
 	pollEvents();
-
-
 	updateMousePositions();
-
-	
-	En.updateEnemies();
 	checkInputs();
+	
+	en.updateEnemies();
+	
 }
 
-void Game::renderEnemies(sf::RenderTarget& target){
-	for (auto &i : enemies){
-		target.draw(i);
-	}
-}
 
 void Game::render(){
-	window->clear(sf::Color(0, 0, 0));
+	ren->render();
 
+}
 
-	// Draw objects
-	renderEnemies(*this->window);		// dereference this->window
-	
-
-	window->display();
-
-	
+// Debug: move this to destructor
+void Game::deleteOnClose(){
+	delete this->window;
+	delete this->ren;
 }

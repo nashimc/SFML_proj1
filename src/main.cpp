@@ -3,7 +3,6 @@
 
 
 
-
 int main(){
 
     // Init srand
@@ -22,6 +21,12 @@ int main(){
 
         // Render
         game.render();
+    }
+
+
+
+    if (game.isRunning() == false){
+        game.deleteOnClose();
     }
 
     return 0;
