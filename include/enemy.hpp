@@ -6,20 +6,22 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
+// #include "objectdrawtrans.hpp"
 
-class Enemy : public sf::RectangleShape{
+class Enemy{
+	
 private:
-	int width;
-	int height;
+	static int width;
+	static int height;
+
 	int& points;
 	int& health;
-	sf::Vector2f& mousePosView;
 	
 	bool mouseHeld = false;
 	bool deleted;
 
 	sf::RectangleShape recEnemy;
-	std::vector<RectangleShape>* enemies;
+	std::vector<sf::RectangleShape>* enemies;
 
 	int maxEnemies = 5;
 	float enemySpawnTimer = 0.f; 
@@ -28,12 +30,11 @@ private:
 
 
 public:
-	Enemy(int width, int height, int& points, int& health, sf::Vector2f& mousePosView, std::vector<sf::RectangleShape>* enemies);
+	Enemy(int& points, int& health, std::vector<sf::RectangleShape>* enemies);
 	virtual ~Enemy();
+	
 	void spawnRecEnemy();
 	void updateEnemies();
-
-
 
 
 };

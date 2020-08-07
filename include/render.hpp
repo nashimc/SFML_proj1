@@ -1,3 +1,5 @@
+#pragma once
+
 #include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
@@ -5,17 +7,22 @@
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
+#include "player.hpp"
 
-class Render : public sf::RectangleShape{
+
+
+class Render{
 private:
+	// possibly static, look up deleting all pointers
 	sf::RenderWindow* window;
-	std::vector<RectangleShape>* enemies;
+	std::vector<sf::RectangleShape>* enemies;
+	std::vector<sf::CircleShape>* playerVec;
 
 public:
-	Render(sf::RenderWindow* window, std::vector<RectangleShape>* enemies);
+	Render(sf::RenderWindow* window, std::vector<sf::CircleShape>* playerVec, std::vector<sf::RectangleShape>* enemies);
 	virtual ~Render();
 
+	void renderPlayer();
 	void renderEnemies();
-
 	void render();
 };

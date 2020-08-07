@@ -7,13 +7,14 @@
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
-#include "enemy.hpp"
+
 #include "render.hpp"
-
-
-
+#include "objectdrawtrans.hpp"
+#include "enemy.hpp"
+#include "player.hpp"
 
 class Game{
+
 private:
 	sf::RenderWindow* window;
 	sf::VideoMode videoMode;
@@ -32,12 +33,15 @@ private:
 	bool deleted;
 
 	// Game objects	
+	std::vector<sf::CircleShape> playerVec;
 	std::vector<sf::RectangleShape> enemies;
 
-	Enemy en{800, 600, points, health, mousePosView, &enemies};
+	Player* pl;
+	Enemy* en;
 	Render* ren;
 
 
+	// Player pl;
 	
 
 public:
@@ -55,11 +59,8 @@ public:
 	// Funcs
 	void pollEvents();			// internally used in this->update()
 	void updateMousePositions();
-	void spawnRecEnemy();
-	void spawnCircEnemy();
 	void checkInputs();
 	void update();
-	void renderEnemies(sf::RenderTarget& target);
 	void render();
 
 	// Debug

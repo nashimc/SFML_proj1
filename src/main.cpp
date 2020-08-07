@@ -24,10 +24,10 @@ int main(){
     }
 
 
-
-    if (game.isRunning() == false){
-        game.deleteOnClose();
-    }
+    // debug
+    // if (game.isRunning() == false){
+    //     game.deleteOnClose();
+    // }
 
     return 0;
 }

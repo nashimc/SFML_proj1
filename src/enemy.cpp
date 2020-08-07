@@ -1,24 +1,25 @@
 #include "enemy.hpp"
 
+int Enemy::width = 1200;
+int Enemy::height = 800;
 
-Enemy::Enemy(int width, int height, int& points, int& health, sf::Vector2f& mousePosView, std::vector<sf::RectangleShape>* enemies)
-:	width{width},
-	height{height},
-	points{points},
-	health{health},
-	mousePosView{mousePosView},
-	enemies{enemies}
+Enemy::Enemy(int& points, int& health, std::vector<sf::RectangleShape>* enemies)
+:	points(points),
+	health(health),
+	enemies(enemies)
 {}
 
-Enemy::~Enemy(){}
+Enemy::~Enemy(){
+
+	enemies = NULL;
+}
 
 
 void Enemy::spawnRecEnemy(){
 
 
 	this->recEnemy.setSize(sf::Vector2f(32.f, 32.f));
-	// this->recEnemy.setPosition(static_cast<float>(rand() % static_cast<int>(this->width - this->recEnemy.getSize().x)), 0.f);		// rand() only takes int, then converting into float
-	this->recEnemy.setPosition(static_cast<float>((rand() % static_cast<int>(768))), 0.f);		// rand() only takes int, then converting into float
+	this->recEnemy.setPosition(static_cast<float>((rand() % static_cast<int>(1168))), 0.f);		// rand() only takes int, then converting into float
 
 	this->recEnemy.setFillColor(sf::Color::Cyan);
 	this->recEnemy.setOutlineColor(sf::Color::Cyan);
@@ -53,7 +54,7 @@ void Enemy::updateEnemies(){
 		this->deleted = false; // may need to change this to game deleted or get pointe/ref to here
 
 		(*enemies)[i].move(0.f, 3.f);
-		if ((*enemies)[i].getPosition().y > 800){ // change back to >
+		if ((*enemies)[i].getPosition().y > 1200){ 
 			enemies->erase(enemies->begin() + i);
 			health = health - 10;
 			if (health <= 0){

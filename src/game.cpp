@@ -1,17 +1,29 @@
 #include <iostream>
 #include "game.hpp"
 
-
-
+// try an remove args of Render constructors
 Game::Game(){
 	this->initVariables();		// create window with nullptr first
 	this->initWindow();
 
-	ren = new Render{window, &enemies};	
+	pl = new Player(&playerVec);
+	en = new Enemy(points, health, &enemies);
+	ren = new Render(window, &playerVec, &enemies);	
+	
 }
 
 Game::~Game(){
 
+	delete pl;
+	delete ren;	
+	delete window;
+	
+	
+	pl = NULL;
+	ren = NULL;
+	window = NULL;
+	
+	
 }
 
 void Game::initVariables(){
@@ -23,14 +35,11 @@ void Game::initVariables(){
 
 	this->mouseHeld = false;
 
-
-
-
 }
 
 void Game::initWindow(){
-	this->videoMode.width = 800;			// accessing 
-	this->videoMode.height = 600;			// accessing 
+	this->videoMode.width = 1200;			// accessing 
+	this->videoMode.height = 800;			// accessing 
 
 	this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Titlebar | sf::Style::Close);		// window properties
 
@@ -41,7 +50,7 @@ const bool Game::isRunning() const{
 	return this->window->isOpen();
 }
 
-
+// eventualy serperate this
 void Game::pollEvents(){
 	// Used internally in this->update()
 	while (this->window->pollEvent(this->event)){ // 
@@ -99,7 +108,7 @@ void Game::update(){
 	updateMousePositions();
 	checkInputs();
 	
-	en.updateEnemies();
+	en->updateEnemies();
 	
 }
 
@@ -110,7 +119,7 @@ void Game::render(){
 }
 
 // Debug: move this to destructor
-void Game::deleteOnClose(){
-	delete this->window;
-	delete this->ren;
-}
+// void Game::deleteOnClose(){
+// 	delete window;
+// 	delete ren;
+// }
