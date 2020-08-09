@@ -3,8 +3,8 @@
 
 // try an remove args of Render constructors
 Game::Game(){
-	this->initVariables();		// create window with nullptr first
-	this->initWindow();
+	initVariables();		// create window with nullptr first
+	initWindow();
 
 	pl = new Player(&playerVec);
 	en = new Enemy(points, health, &enemies);
@@ -18,51 +18,49 @@ Game::~Game(){
 	delete ren;	
 	delete window;
 	
-	
 	pl = NULL;
 	ren = NULL;
 	window = NULL;
 	
-	
 }
 
 void Game::initVariables(){
-	this->window = nullptr;
+	window = nullptr;
 
 	// Game logic
-	this->points = 0;
-	this->health = 100;
+	points = 0;
+	health = 100;
 
-	this->mouseHeld = false;
+	mouseHeld = false;
 
 }
 
 void Game::initWindow(){
-	this->videoMode.width = 1200;			// accessing 
-	this->videoMode.height = 800;			// accessing 
+	videoMode.width = 1200;			// accessing 
+	videoMode.height = 800;			// accessing 
 
-	this->window = new sf::RenderWindow(this->videoMode, "Game", sf::Style::Titlebar | sf::Style::Close);		// window properties
+	window = new sf::RenderWindow(videoMode, "Game", sf::Style::Titlebar | sf::Style::Close);		// window properties
 
-	this->window->setFramerateLimit(60);		// FPS limit
+	window->setFramerateLimit(60);		// FPS limit
 }
 
 const bool Game::isRunning() const{
-	return this->window->isOpen();
+	return window->isOpen();
 }
 
 // eventualy serperate this
 void Game::pollEvents(){
 	// Used internally in this->update()
-	while (this->window->pollEvent(this->event)){ // 
-            switch(this->event.type){
+	while (window->pollEvent(event)){ // 
+            switch(event.type){
                 
                 case sf::Event::Closed:
-                    this->window->close();
+                    window->close();
                     break;
 
                 case sf::Event::KeyPressed:
-                    if(this->event.key.code == sf::Keyboard::Escape){
-                        this->window->close();
+                    if(event.key.code == sf::Keyboard::Escape){
+                        window->close();
                     break;
                     }
                 
@@ -74,8 +72,8 @@ void Game::pollEvents(){
 
 void Game::updateMousePositions(){
 	// Updates the mouse position relative to window (Vector2i)
-	this->mousePosWindow = sf::Mouse::getPosition(*this->window);
-	this->mousePosView = this->window->mapPixelToCoords(this->mousePosWindow);
+	mousePosWindow = sf::Mouse::getPosition(*window);
+	mousePosView = window->mapPixelToCoords(mousePosWindow);
 }
 
 void Game::checkInputs(){
@@ -104,11 +102,11 @@ void Game::checkInputs(){
 void Game::update(){
 
 	// Calling polling of event/update functions
-	pollEvents();
-	updateMousePositions();
+	pollEvents();	
+	updateMousePositions();				// track mouse positions
 	checkInputs();
 	
-	en->updateEnemies();
+	en->updateEnemy();
 	
 }
 

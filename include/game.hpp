@@ -40,8 +40,6 @@ private:
 	Enemy* en;
 	Render* ren;
 
-
-	// Player pl;
 	
 
 public:

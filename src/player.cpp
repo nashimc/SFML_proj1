@@ -27,3 +27,7 @@ void Player::initPlayer(){
 void Player::movePlayer(){
 	
 }
+
+void Player::updatePlayer(){
+	
+}

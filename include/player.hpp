@@ -22,5 +22,5 @@ public:
 	void initPlayer();
 	sf::CircleShape* getPlayer();
 	void movePlayer();
-
+	void updatePlayer();
 };

@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <vector>
 #include <ctime>
@@ -33,8 +35,10 @@ public:
 	Enemy(int& points, int& health, std::vector<sf::RectangleShape>* enemies);
 	virtual ~Enemy();
 	
-	void spawnRecEnemy();
-	void updateEnemies();
+	void createRecEnemy();
+	void spawnEnemy();
+	void moveEnemy();
+	void updateEnemy();
 
 
 };
