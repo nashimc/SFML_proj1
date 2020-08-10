@@ -11,12 +11,10 @@ int main(){
     // Init game
     Game game;
     
-
     // Game loop
     while(game.isRunning()){
 
-
-        // Update - polling contained in update()
+        // Update 
         game.update();
 
         // Render

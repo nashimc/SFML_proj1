@@ -55,9 +55,9 @@ public:
 	const bool isRunning() const;
 
 	// Funcs
-	void pollEvents();			// internally used in this->update()
-	void updateMousePositions();
-	void checkInputs();
+	void pollEvents();				// internally used in this->update()
+	void updateMousePositions();	// get mouse position
+	void checkInputs();				
 	void update();
 	void render();
 

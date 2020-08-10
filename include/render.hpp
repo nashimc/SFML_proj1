@@ -13,7 +13,7 @@
 
 class Render{
 private:
-	// possibly static, look up deleting all pointers
+	
 	sf::RenderWindow* window;
 	std::vector<sf::RectangleShape>* enemies;
 	std::vector<sf::CircleShape>* playerVec;

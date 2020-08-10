@@ -52,14 +52,14 @@ const bool Game::isRunning() const{
 void Game::pollEvents(){
 	// Used internally in this->update()
 	while (window->pollEvent(event)){ // 
-            switch(event.type){
+            switch (event.type){
                 
                 case sf::Event::Closed:
                     window->close();
                     break;
 
                 case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::Escape){
+                    if (event.key.code == sf::Keyboard::Escape){
                         window->close();
                     break;
                     }
@@ -96,6 +96,16 @@ void Game::checkInputs(){
 	}
 	else{
 		mouseHeld = false;
+	}
+
+	// if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+	// 	playerVec[0].move(5.f, 0.f)
+	// }
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
+		playerVec[0].move(-5.f, 0.f);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
+		playerVec[0].move(5.f, 0.f);
 	}
 }
 
