@@ -103,9 +103,15 @@ void Game::checkInputs(){
 	// }
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		playerVec[0].move(-5.f, 0.f);
+		if (playerVec[0].getPosition().x < 0){
+			playerVec[0].setPosition(0, 700);
+		}
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
 		playerVec[0].move(5.f, 0.f);
+		if (playerVec[0].getPosition().x > 1140){
+			playerVec[0].setPosition(1140, 700);
+		}
 	}
 }
 

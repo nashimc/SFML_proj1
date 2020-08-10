@@ -13,7 +13,7 @@ Player::~Player(){
 }
 
 void Player::initPlayer(){
-	this->player.setRadius(32);
+	this->player.setRadius(30);
 	this->player.setPosition(600, 700);	
 	this->player.setFillColor(sf::Color::Green);
 	this->player.setOutlineColor(sf::Color::Green);
