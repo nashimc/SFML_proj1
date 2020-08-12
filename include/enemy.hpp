@@ -16,12 +16,6 @@ private:
 	static int width;
 	static int height;
 
-	int& points;
-	int& health;
-	
-	bool mouseHeld = false;
-	bool deleted;
-
 	sf::RectangleShape recEnemy;
 	std::vector<sf::RectangleShape>* enemies;
 
@@ -32,14 +26,13 @@ private:
 
 
 public:
-	Enemy(int& points, int& health, std::vector<sf::RectangleShape>* enemies);
+	Enemy(std::vector<sf::RectangleShape>* enemies);
 	virtual ~Enemy();
 	
 	void createRecEnemy();
 	void spawnEnemy();
 	void moveEnemy();
 	void updateEnemy();
-
 
 };
 

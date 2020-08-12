@@ -56,6 +56,7 @@ public:
 
 	// Funcs
 	void pollEvents();				// internally used in this->update()
+	void gameLogic();
 	void updateMousePositions();	// get mouse position
 	void checkInputs();				
 	void update();

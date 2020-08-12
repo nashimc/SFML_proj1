@@ -13,11 +13,11 @@ Player::~Player(){
 }
 
 void Player::initPlayer(){
-	this->player.setRadius(30);
-	this->player.setPosition(600, 700);	
-	this->player.setFillColor(sf::Color::Green);
-	this->player.setOutlineColor(sf::Color::Green);
-	this->player.setOutlineThickness(1.f);
+	player.setRadius(30);
+	player.setPosition(600, 700);	
+	player.setFillColor(sf::Color::Green);
+	player.setOutlineColor(sf::Color::Green);
+	player.setOutlineThickness(1.f);
 
 	playerVec->push_back(player);
 

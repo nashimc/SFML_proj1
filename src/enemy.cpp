@@ -3,10 +3,8 @@
 int Enemy::width = 1200;
 int Enemy::height = 800;
 
-Enemy::Enemy(int& points, int& health, std::vector<sf::RectangleShape>* enemies)
-:	points(points),
-	health(health),
-	enemies(enemies)
+Enemy::Enemy(std::vector<sf::RectangleShape>* enemies)
+:	enemies(enemies)
 {}
 
 Enemy::~Enemy(){
@@ -43,20 +41,9 @@ void Enemy::spawnEnemy(){
 }
 
 void Enemy::moveEnemy(){
-		// Move enemies
+	// Move enemies
 	for (int i = 0; i < enemies->size(); ++i){
-
-		deleted = false; 
-
 		(*enemies)[i].move(0.f, 3.f);
-		if ((*enemies)[i].getPosition().y > 1200){ 
-			enemies->erase(enemies->begin() + i);
-			health = health - 10;
-			if (health <= 0){
-				// game over
-			}
-			std::cout << "Health: " << health << std::endl;;		
-		}
 	}
 }
 
