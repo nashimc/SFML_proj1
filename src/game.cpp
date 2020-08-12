@@ -7,7 +7,7 @@ Game::Game(){
 	initWindow();
 
 	pl = new Player(&playerVec);
-	en = new Enemy(points, health, &enemies);
+	en = new Enemy(&enemies);
 	ren = new Render(window, &playerVec, &enemies);	
 	
 }
@@ -15,10 +15,12 @@ Game::Game(){
 Game::~Game(){
 
 	delete pl;
+	delete en;
 	delete ren;	
 	delete window;
 	
 	pl = NULL;
+	en = NULL;
 	ren = NULL;
 	window = NULL;
 	
@@ -70,6 +72,24 @@ void Game::pollEvents(){
         }
 }
 
+void Game::gameLogic(){
+	// check enemy positions
+	for (int i = 0; i < enemies.size(); ++i){
+
+		deleted = false; 
+
+		if ((enemies)[i].getPosition().y > 1200){ 
+			enemies.erase(enemies.begin() + i);
+			deleted = true;
+			health = health - 10;
+			if (health <= 0){
+				// game over
+			}
+			std::cout << "Health: " << health << std::endl;;		
+		}
+	}
+}
+
 void Game::updateMousePositions(){
 	// Updates the mouse position relative to window (Vector2i)
 	mousePosWindow = sf::Mouse::getPosition(*window);
@@ -98,9 +118,9 @@ void Game::checkInputs(){
 		mouseHeld = false;
 	}
 
-	// if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-	// 	playerVec[0].move(5.f, 0.f)
-	// }
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
+		
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		playerVec[0].move(-5.f, 0.f);
 		if (playerVec[0].getPosition().x < 0){
@@ -121,8 +141,10 @@ void Game::update(){
 	pollEvents();	
 	updateMousePositions();				// track mouse positions
 	checkInputs();
+	gameLogic();
 	
 	en->updateEnemy();
+	// need an updatePlayer for player losing  - dieing etc
 	
 }
 
