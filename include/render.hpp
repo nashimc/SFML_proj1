@@ -15,14 +15,17 @@ class Render{
 private:
 	
 	sf::RenderWindow* window;
+	sf::CircleShape* player;
 	std::vector<sf::RectangleShape>* enemies;
-	std::vector<sf::CircleShape>* playerVec;
+	std::vector<sf::CircleShape>* projectileVec;
+	
 
 public:
-	Render(sf::RenderWindow* window, std::vector<sf::CircleShape>* playerVec, std::vector<sf::RectangleShape>* enemies);
+	Render(sf::RenderWindow* window, sf::CircleShape* player, std::vector<sf::RectangleShape>* enemies, std::vector<sf::CircleShape>* projectileVec);
 	virtual ~Render();
 
 	void renderPlayer();
 	void renderEnemies();
+	void renderProjectile();
 	void render();
 };

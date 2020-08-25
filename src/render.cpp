@@ -2,28 +2,34 @@
 
 
 
-Render::Render(sf::RenderWindow* window, std::vector<sf::CircleShape>* playerVec, std::vector<sf::RectangleShape>* enemies)
+Render::Render(sf::RenderWindow* window, sf::CircleShape* player, std::vector<sf::RectangleShape>* enemies, std::vector<sf::CircleShape>* projectileVec)
 :	window(window),
+	player(player),
 	enemies(enemies),
-	playerVec(playerVec)
+	projectileVec(projectileVec)
 {}
 
 Render::~Render(){
 	
-	playerVec = NULL;
+	player = NULL;
 	enemies = NULL;
+	projectileVec = NULL;
 	window = NULL;
 	
 }
 
 void Render::renderPlayer(){
-	for (auto &i : *playerVec){
-		window->draw(i);
-	}
+	window->draw(*player);
 }
 
 void Render::renderEnemies(){
 	for (auto &i : *enemies){
+		window->draw(i);
+	}
+}
+
+void Render::renderProjectile(){
+	for (auto &i : *projectileVec){
 		window->draw(i);
 	}
 }
@@ -33,6 +39,7 @@ void Render::render(){
 
 	renderPlayer();
 	renderEnemies();
+	renderProjectile();
 
 	window->display();
 }

@@ -9,9 +9,11 @@
 #include <SFML/Network.hpp>
 
 #include "render.hpp"
+#include "inputs.hpp"
 #include "objectdrawtrans.hpp"
 #include "enemy.hpp"
 #include "player.hpp"
+#include "weapon.hpp"
 
 class Game{
 
@@ -20,9 +22,12 @@ private:
 	sf::VideoMode videoMode;
 	sf::Event event;
 
-	// Mouse position
+	// Positions
 	sf::Vector2i mousePosWindow;
 	sf::Vector2f mousePosView;
+	// sf::Vector2f playerPos;
+	float playerPosX;
+	float playerPosY;
 
 	// Controls
 	bool mouseHeld;
@@ -33,12 +38,16 @@ private:
 	bool deleted;
 
 	// Game objects	
-	std::vector<sf::CircleShape> playerVec;
+	sf::CircleShape player;
 	std::vector<sf::RectangleShape> enemies;
+	std::vector<sf::CircleShape> projectileVec;
 
 	Player* pl;
 	Enemy* en;
+	Weapon* wep;
+	Inputs* input;
 	Render* ren;
+	
 
 	
 
@@ -57,7 +66,7 @@ public:
 	// Funcs
 	void pollEvents();				// internally used in this->update()
 	void gameLogic();
-	void updateMousePositions();	// get mouse position
+	void updatePositions();			// get mouse position
 	void checkInputs();				
 	void update();
 	void render();

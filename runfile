@@ -1,0 +1,1 @@
+g++ src/*.cpp -std=c++14 -o main -I /usr/local/Cellar/sfml/2.5.1/include -I include -L /usr/local/Cellar/sfml/2.5.1/lib -lsfml-audio -lsfml-graphics -lsfml-network -lsfml-system -lsfml-window && ./main

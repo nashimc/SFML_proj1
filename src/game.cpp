@@ -6,9 +6,12 @@ Game::Game(){
 	initVariables();		// create window with nullptr first
 	initWindow();
 
-	pl = new Player(&playerVec);
+	pl = new Player(&player);
 	en = new Enemy(&enemies);
-	ren = new Render(window, &playerVec, &enemies);	
+	wep = new Weapon(&playerPosX, &playerPosY, &projectileVec);
+	input = new Inputs(&player, wep);
+	ren = new Render(window, &player, &enemies, &projectileVec);	
+
 	
 }
 
@@ -16,11 +19,15 @@ Game::~Game(){
 
 	delete pl;
 	delete en;
+	delete wep;
+	delete input;
 	delete ren;	
 	delete window;
 	
 	pl = NULL;
 	en = NULL;
+	wep = NULL;
+	input = NULL;
 	ren = NULL;
 	window = NULL;
 	
@@ -33,8 +40,8 @@ void Game::initVariables(){
 	points = 0;
 	health = 100;
 
+	// Controls
 	mouseHeld = false;
-
 }
 
 void Game::initWindow(){
@@ -88,58 +95,60 @@ void Game::gameLogic(){
 			std::cout << "Health: " << health << std::endl;;		
 		}
 	}
-}
 
-void Game::updateMousePositions(){
-	// Updates the mouse position relative to window (Vector2i)
-	mousePosWindow = sf::Mouse::getPosition(*window);
-	mousePosView = window->mapPixelToCoords(mousePosWindow);
-}
-
-void Game::checkInputs(){
-	// Check if enemies clicked
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-		if (mouseHeld == false){
-			mouseHeld = true;
-			deleted = false;
-
-			for (int i = 0; i < enemies.size(); ++i){
-				if (enemies[i].getGlobalBounds().contains(mousePosView)){
-					deleted = true;
-					enemies.erase(enemies.begin() + i); // + i needed to erase i-th element
-
-					points = points + 1;
-					std::cout << "Points: " << points << std::endl;
-				}
+	// check bullet in motion
+	if (!projectileVec.empty()){
+		for (int i; i < projectileVec.size(); ++i){
+			wep->moveProjectile();
+			if (projectileVec[i].getPosition().y < 0){
+				projectileVec.erase(projectileVec.begin() + i);
 			}
 		}
 	}
-	else{
-		mouseHeld = false;
-	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)){
-		
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
-		playerVec[0].move(-5.f, 0.f);
-		if (playerVec[0].getPosition().x < 0){
-			playerVec[0].setPosition(0, 700);
-		}
-	}
-	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)){
-		playerVec[0].move(5.f, 0.f);
-		if (playerVec[0].getPosition().x > 1140){
-			playerVec[0].setPosition(1140, 700);
-		}
-	}
+}
+
+void Game::updatePositions(){
+	// Updates the mouse position relative to window (Vector2i)
+	mousePosWindow = sf::Mouse::getPosition(*window);
+	mousePosView = window->mapPixelToCoords(mousePosWindow);
+
+	// init 
+	playerPosX = player.getPosition().x;
+	playerPosY = player.getPosition().y;
+}
+
+void Game::checkInputs(){
+	// // Mouse controls
+	// Check if enemies clicked
+	// if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+	// 	if (mouseHeld == false){
+	// 		mouseHeld = true;
+	// 		deleted = false;
+
+	// 		for (int i = 0; i < enemies.size(); ++i){
+	// 			if (enemies[i].getGlobalBounds().contains(mousePosView)){
+	// 				deleted = true;
+	// 				enemies.erase(enemies.begin() + i); // + i needed to erase i-th element
+
+	// 				points = points + 1;
+	// 				std::cout << "Points: " << points << std::endl;
+	// 			}
+	// 		}
+	// 	}
+	// }
+	// else{
+	// 	mouseHeld = false;
+	// }
+
+	input->keyboardInputs();
 }
 
 void Game::update(){
 
 	// Calling polling of event/update functions
 	pollEvents();	
-	updateMousePositions();				// track mouse positions
+	updatePositions();				// track mouse positions
 	checkInputs();
 	gameLogic();
 	

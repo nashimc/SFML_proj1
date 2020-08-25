@@ -1,23 +1,22 @@
-#pragma once
-
-#include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 #include <SFML/Window.hpp>
 #include <SFML/Audio.hpp>
 #include <SFML/Network.hpp>
 
+#include "weapon.hpp"
 
-class Player{
+class Inputs{
 private:
+
 	sf::CircleShape* player;
-	
+	Weapon* wep;
 
 public:
-	Player(sf::CircleShape* player);
-	virtual ~Player();
+	Inputs(sf::CircleShape* player, Weapon* wep);
+	~Inputs();
 
-	void initPlayer();
+	void keyboardInputs();
 
-	sf::CircleShape* getPlayer();
+
 };
