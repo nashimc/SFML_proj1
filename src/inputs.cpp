@@ -16,6 +16,14 @@ void Inputs::keyboardInputs(){
 		wep->shootProjectile();
 	}
 
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)){
+		wep->cycleWeaponForward();
+	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::E)){
+		wep->cycleWeaponBackward();
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)){
 		player->move(-5.f, 0.f);
 		if (player->getPosition().x < 0){

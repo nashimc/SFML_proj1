@@ -14,12 +14,24 @@ Weapon::~Weapon(){
 }
 
 void Weapon::weapon_1(){
-	projectile.setRadius(6);
-	projectile.setPosition(*playerPosX + 25, *playerPosY);	
-	projectile.setFillColor(sf::Color::Red);
-	projectile.setOutlineColor(sf::Color::Red);
+	projectile.setPosition(*playerPosX + 25, *playerPosY);
 	projectile.setOutlineThickness(1.f);
-
+	if (chosenWeapon == 1){
+		projectile.setRadius(5);
+		projectile.setFillColor(sf::Color::Red);
+		projectile.setOutlineColor(sf::Color::Red);
+	}	
+	if (chosenWeapon == 2){
+		projectile.setRadius(10);
+		projectile.setFillColor(sf::Color::Blue);
+		projectile.setOutlineColor(sf::Color::Blue);
+	}
+	if (chosenWeapon == 3){
+		projectile.setRadius(10);
+		projectile.setFillColor(sf::Color::White);
+		projectile.setOutlineColor(sf::Color::White);
+	}		
+	
 	projectileVec->push_back(projectile);
 
 }
@@ -35,6 +47,22 @@ void Weapon::moveProjectile(){
 		(*projectileVec)[i].move(0.f, -projectileSpeed);
 	}
 }
+
+
+void Weapon::cycleWeaponForward(){
+	chosenWeapon += 1;
+	if (chosenWeapon > 3){
+		chosenWeapon = 1;
+	}
+}
+
+void Weapon::cycleWeaponBackward(){
+	chosenWeapon -= 1;
+	if (chosenWeapon < 1){
+		chosenWeapon = 3;
+	}
+}
+
 
 // // idea 1	- push_back and pop different projectile for diff weapons
 // // 			- cycle weapons

@@ -96,10 +96,10 @@ void Game::gameLogic(){
 		}
 	}
 
-	// check bullet in motion
+	// check projectiles
 	if (!projectileVec.empty()){
+		wep->moveProjectile();
 		for (int i; i < projectileVec.size(); ++i){
-			wep->moveProjectile();
 			if (projectileVec[i].getPosition().y < 0){
 				projectileVec.erase(projectileVec.begin() + i);
 			}
@@ -108,7 +108,7 @@ void Game::gameLogic(){
 
 }
 
-void Game::updatePositions(){
+void Game::getPositions(){
 	// Updates the mouse position relative to window (Vector2i)
 	mousePosWindow = sf::Mouse::getPosition(*window);
 	mousePosView = window->mapPixelToCoords(mousePosWindow);
@@ -148,7 +148,7 @@ void Game::update(){
 
 	// Calling polling of event/update functions
 	pollEvents();	
-	updatePositions();				// track mouse positions
+	getPositions();				// track mouse positions
 	checkInputs();
 	gameLogic();
 	
